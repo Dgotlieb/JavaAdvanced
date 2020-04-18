@@ -31,14 +31,24 @@ public class UsingElementsTest {
         driver.findElement(By.id("source")).submit();
     }
 
+    @Test
+    public void test03_sendKeys() {
+        driver.findElement(By.id("source")).sendKeys("hello");
+    }
+
+    @Test
+    public void test04_clearTextArea() {
+        driver.findElement(By.id("source")).clear();
+    }
+
     // todo @Test - will not work now...
-    public void test03_clickAnElementFromAListWithAKnownIndex() {
+    public void test05_clickAnElementFromAListWithAKnownIndex() {
         List<WebElement> buttonsList = driver.findElements(By.id("Button"));
         buttonsList.get(3).click();
     }
 
     //todo @Test - will not work now...
-    public void test04_iteratingAListOfElements(){
+    public void test06_iteratingAListOfElements(){
         // Create a list of all elements with the ID=Button
         List<WebElement> buttonsList = driver.findElements(By.id("Button"));
         // Iterating through the list
