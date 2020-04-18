@@ -1,21 +1,44 @@
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UsingElementsTest {
     private static WebDriver driver;
 
+    @BeforeClass
+    public static void runOnceBeforeClass() {
+        System.setProperty("webdriver.chrome.driver" , "C:\\Users\\dgotl\\Downloads\\chromedriver_win32\\ChromeDriver.exe");
+        driver = new ChromeDriver();
+        driver.get("https://translate.google.com");
+    }
+
     @Test
-    public void test01_clickAnElementFromAListWithAKnownIndex() {
+    public void test01_clickAnElement() {
+        driver.findElement(By.id("source")).click();
+    }
+
+    @Test
+    public void test02_submitForm() {
+        driver.findElement(By.id("source")).submit();
+    }
+
+    // todo @Test - will not work now...
+    public void test03_clickAnElementFromAListWithAKnownIndex() {
         List<WebElement> buttonsList = driver.findElements(By.id("Button"));
         buttonsList.get(3).click();
     }
 
-    @Test
-    public void test02_iteratingAListOfElements(){
+    //todo @Test - will not work now...
+    public void test04_iteratingAListOfElements(){
         // Create a list of all elements with the ID=Button
         List<WebElement> buttonsList = driver.findElements(By.id("Button"));
         // Iterating through the list
@@ -25,5 +48,10 @@ public class UsingElementsTest {
                 currentButton.click();
             }
         }
+    }
+
+    @AfterClass
+    public static void tearDown(){
+        driver.quit();
     }
 }
